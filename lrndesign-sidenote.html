@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon /iron-icon.html">
 
 <!--
 `lrndesign-sidenote`
@@ -12,9 +13,27 @@ A LRN element
     <style>
       :host {
         display: block;
+        --container-bg-color: lightgray;
+        --container-text-color: black;
+        --container-padding: 1em;
+        --container-outset: 0;
+        @apply --host-styles;
+      }
+      #container {
+        display: block;
+        background: var(--container-bg-color);
+        color: var(--container-text-color);
+        padding: var(--container-padding);
+        margin-left: calc(-var(--container-outset));
+        @apply --container-styles;
+      }
+      #label {
       }
     </style>
-    <h2>[[title]]</h2>
+    <div id="container">
+      <div id="label" hidden$=[[!label]]>[[label]]</div>
+      <slot></slot>
+    </div>
   </template>
 
   <script>
@@ -23,12 +42,31 @@ A LRN element
       is: 'lrndesign-sidenote',
 
       properties: {
-        title: {
-          type: String,
-          value: 'lrndesign-sidenote',
+        label: {
+          type: String
         },
+        textColor: {
+          type: String,
+          value: 'black'
+        },
+        bgColor: {
+          type: String,
+          value: 'lightblue'
+        },
+        outset: {
+          type: Number,
+          value: 10
+        }
       },
-
+      observers: [
+        '__updateStyles(textColor, bgColor, outset)'
+      ],
+      __updateStyles: function(textColor, bgColor, outset) {
+        this.customStyle['--container-text-color'] = textColor;
+        this.customStyle['--container-bg-color'] = bgColor;
+        this.customStyle['--container-outset'] = `${outset}%`;
+        this.updateStyles();
+      }
     });
   </script>
 </dom-module>
