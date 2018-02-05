@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`lrndesign-sidenote`
+A LRN element
+
+@demo demo/index.html
+-->
+
+<dom-module id="lrndesign-sidenote">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>[[title]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'lrndesign-sidenote',
+
+      properties: {
+        title: {
+          type: String,
+          value: 'lrndesign-sidenote',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
