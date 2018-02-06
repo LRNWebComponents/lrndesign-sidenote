@@ -27,7 +27,7 @@ A LRN element
         background: var(--container-bg-color);
         color: var(--container-text-color);
         padding: var(--container-padding);
-        margin-left: calc((-50vw + 50vw));
+        margin-left: -var(--container-outset);
         @apply --container-styles;
       }
 
@@ -79,11 +79,11 @@ A LRN element
         },
         outset: {
           type: Number,
-          value: 10
+          value: 1
         },
         outsetMeasurementType: {
           type: String,
-          value: '%'
+          value: 'em'
         },
         icon: {
           type: String,
@@ -94,10 +94,10 @@ A LRN element
         '__updateStyles(bgColor, outset, outsetMeasurementType)'
       ],
       __updateStyles: function (bgColor, outset, outsetMeasurementType) {
-        const bgColorHex = this.getHexfromColorString(bgColor) || bgColor;
+        const bgColorHex = this._colorTransformFromClass(bgColor) || bgColor;
         this.customStyle['--container-text-color'] = this.getTextContrastColor(bgColorHex);
         this.customStyle['--container-bg-color'] = bgColorHex;
-        this.customStyle['--container-outset'] = `${outset}${outsetMeasurementType}`;
+        this.customStyle['--container-outset'] = `${Number(outset)}${outsetMeasurementType}`;
         this.updateStyles();
       }
     });
