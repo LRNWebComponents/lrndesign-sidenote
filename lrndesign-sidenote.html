@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../a11y-behaviors/a11y-behaviors.html">
+<link rel="import" href="../materializecss-styles/materializecss-styles.html">
 
 <!--
 `lrndesign-sidenote`
@@ -20,24 +21,29 @@ A LRN element
         --container-outset: 0;
         @apply --host-styles;
       }
+
       #container {
         display: block;
         background: var(--container-bg-color);
         color: var(--container-text-color);
         padding: var(--container-padding);
-        margin-left: calc(-var(--container-outset));
+        margin-left: calc((-50vw + 50vw));
         @apply --container-styles;
       }
+
       #header {
         display: flex;
         align-items: center;
         @apply --container-header;
       }
+
       #icon {
         margin-right: .5em;
+        @apply --icon-styles;
       }
+
       #label {
-        font-size: 1.2em;
+        font-size: 1.3em;
         margin: .8em 0;
         flex: 1 1 auto;
         @apply --label-styles;
@@ -57,7 +63,10 @@ A LRN element
 
       is: 'lrndesign-sidenote',
 
-      behaviors: [A11yBehaviors.A11y],
+      behaviors: [
+        A11yBehaviors.A11y,
+        MaterializeCSSBehaviors.ColorBehaviors
+      ],
 
       properties: {
         label: {
@@ -66,7 +75,7 @@ A LRN element
         },
         bgColor: {
           type: String,
-          value: '#94c9d9'
+          value: 'blue-grey darken-1'
         },
         outset: {
           type: Number,
@@ -84,9 +93,10 @@ A LRN element
       observers: [
         '__updateStyles(bgColor, outset, outsetMeasurementType)'
       ],
-      __updateStyles: function(bgColor, outset, outsetMeasurementType) {
-        this.customStyle['--container-text-color'] = this.getTextContrastColor(bgColor);
-        this.customStyle['--container-bg-color'] = bgColor;
+      __updateStyles: function (bgColor, outset, outsetMeasurementType) {
+        const bgColorHex = this.getHexfromColorString(bgColor) || bgColor;
+        this.customStyle['--container-text-color'] = this.getTextContrastColor(bgColorHex);
+        this.customStyle['--container-bg-color'] = bgColorHex;
         this.customStyle['--container-outset'] = `${outset}${outsetMeasurementType}`;
         this.updateStyles();
       }
