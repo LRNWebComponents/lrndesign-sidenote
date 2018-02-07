@@ -2,6 +2,7 @@
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../a11y-behaviors/a11y-behaviors.html">
 <link rel="import" href="../materializecss-styles/materializecss-styles.html">
+<link rel="import" href="../import-lodash/import-lodash.html">
 
 <!--
 `lrndesign-sidenote`
@@ -69,27 +70,72 @@ A LRN element
       ],
 
       properties: {
+        /**
+         * The display label
+         */
         label: {
           type: String,
           value: ''
         },
+        /**
+         * The display icon for the element
+         */
+        icon: {
+          type: String,
+          value: ''
+        },
+        /**
+         * Background Color
+         */
         bgColor: {
           type: String,
-          value: 'blue-grey darken-1'
+          value: '#f7f7f7'
         },
+        /**
+         * Outset will move the entire element left to make it
+         * stand out from the content.
+         */
         outset: {
           type: Number,
-          value: 1
+          value: 0
         },
+        /**
+         * Define the unit of measure for the outset variable
+         * Examples: 'em', 'px', '%', 'vw'
+         */
         outsetMeasurementType: {
           type: String,
           value: 'em'
         },
-        icon: {
-          type: String,
-          value: ''
+      },
+
+      /**
+       * Create global overrides for each property defined in a component
+       *
+       * Example: this will override the default value for bgColor for all
+       *          lrndesign-sidenote elements on the page.
+       * 
+       * <script>
+       *  _.set(window, 'lrndesignSidenote.bgColor', 'blue');
+       * </script>
+       */
+      created: function () {
+        for (prop in this.properties) {
+          let prefix = this.is;
+          // convert prefix to camel case
+          prefix = prefix.replace('-', ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, function (letter, index) {
+            return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+          }).replace(/\s+/g, '');
+
+          // find out if a property override is set on the window object
+          if (typeof window[prefix] !== 'undefined') {
+            if (typeof window[prefix][prop] !== 'undefined') {
+              this.properties[prop].value = window[prefix][prop];
+            };
+          };
         }
       },
+
       observers: [
         '__updateStyles(bgColor, outset, outsetMeasurementType)'
       ],
