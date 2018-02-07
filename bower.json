@@ -4,13 +4,8 @@
   "main": "lrndesign-sidenote.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.9.1",
-    "lrnsys-behaviors": "LRNWebComponents/lrnsys-behaviors#^1.0.0",
-    "hax-behaviors": "LRNWebComponents/hax-behaviors#^0.0.6",
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.1.0",
-    "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
-    "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.4",
-    "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.0",
-    "import-lodash": "^1.0.1"
+    "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
