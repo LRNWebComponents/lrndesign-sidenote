@@ -2,8 +2,6 @@
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../a11y-behaviors/a11y-behaviors.html">
 <link rel="import" href="../materializecss-styles/materializecss-styles.html">
-<link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
-
 <!--
 `lrndesign-sidenote`
 A basic side note
@@ -107,78 +105,6 @@ A basic side note
           type: String,
           value: 'em'
         },
-      },
-      /**
-       * Attached.
-       */
-      attached: function() {
-        // Establish hax properties if they exist
-        let props = {
-          'canScale': true,
-          'canPosition': true,
-          'canEditSource': false,
-          'gizmo': {
-            'title': 'Video player',
-            'description': 'This can present video in a highly accessible manner regardless of source.',
-            'icon': 'av:play-circle-filled',
-            'color': 'red',
-            'groups': ['Video', 'Media'],
-            'handles': [
-              {
-                'type': 'text',
-                'title': 'label',
-              }
-            ],
-            'meta': {
-              'author': 'LRNWebComponents'
-            }
-          },
-          'settings': {
-            'quick': [
-              {
-                'property': 'label',
-                'title': 'Label',
-                'description': 'Text drawing attention of the user',
-                'inputMethod': 'textfield',
-              },
-              {
-                'property': 'bgColor',
-                'title': 'Background color',
-                'description': 'Background color for the text area',
-                'inputMethod': 'colorpicker',
-                'icon': 'editor:format-color-fill',
-              }
-            ],
-            'configure': [
-              {
-                'property': 'label',
-                'title': 'Label',
-                'description': 'Text drawing attention of the user',
-                'inputMethod': 'textfield',
-              },
-              {
-                'property': 'bgColor',
-                'title': 'Background color',
-                'description': '',
-                'inputMethod': 'colorpicker',
-              },
-              {
-                'property': 'icon',
-                'title': 'Icon',
-                'description': '',
-                'inputMethod': 'iconpicker',
-              },
-              {
-                'slot': '',
-                'title': 'Text area',
-                'description': 'Contents of this note',
-                'inputMethod': 'code-editor',
-              },
-            ],
-            'advanced': []
-          }
-        };
-        this.setHaxProperties(props);
       },
       /**
        * Create global overrides for each property defined in a component
